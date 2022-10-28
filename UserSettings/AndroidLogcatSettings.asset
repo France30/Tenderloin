@@ -1,0 +1,245 @@
+{
+    "m_SelectedDeviceId": "1WMHH86DRC1237",
+    "m_SelectedPackage": {
+        "deviceId": "1WMHH86DRC1237",
+        "name": "com.Group3.GOONFPS",
+        "processId": 15383,
+        "exited": false
+    },
+    "m_SelectedPriority": 0,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "1PASH9BM699293",
+            "name": "com.DefaultCompany.xr_lesson_openxrgdv32",
+            "processId": 17739,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 8094,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 8671,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 9200,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 9756,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 10235,
+            "exited": true
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.oculus.shellenv",
+            "processId": 2079,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 11874,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 12574,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 13191,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 13907,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 14399,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 15313,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 16029,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 17006,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 17654,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 18288,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 6911,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 7559,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 20831,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 22458,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 26672,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 28445,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 29466,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 30947,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 10024,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 11502,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 12380,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 14937,
+            "exited": false
+        },
+        {
+            "deviceId": "1WMHH86DRC1237",
+            "name": "com.Group3.GOONFPS",
+            "processId": 15383,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 300.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 0
+    },
+    "m_Filter": "",
+    "m_FilterIsRegularExpression": false,
+    "m_SymbolPaths": []
+}
