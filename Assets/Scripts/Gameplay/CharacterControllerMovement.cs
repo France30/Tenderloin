@@ -9,6 +9,8 @@ public class CharacterControllerMovement : MonoBehaviour
     [SerializeField]
     private float jumpHeight = 5.0f;
     [SerializeField]
+    private float gravityScale = 1.0f;
+    [SerializeField]
     private Transform groundCheck;
     [SerializeField]
     private LayerMask groundMask;
@@ -56,7 +58,7 @@ public class CharacterControllerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, distToGround, groundMask);
         if (isGrounded && playerVelocity.y < 0) playerVelocity.y = -2f;
-        playerVelocity.y += gravity * Time.deltaTime;
+        playerVelocity.y += gravity * Time.deltaTime *gravityScale;
         characterController.Move(playerVelocity * Time.deltaTime);
     }
 }
