@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject target;
+
     private float rotationX, rotationY;
 
     [SerializeField]
@@ -37,5 +40,11 @@ public class CameraController : MonoBehaviour
         //rotate the camera to face our mouse direction
         Quaternion rotation = Quaternion.Euler(-rotationX, rotationY, 0);
         transform.rotation = rotation;
+
+        //rotate the target to face the camera direction
+        target.transform.rotation = Quaternion.Euler(
+            target.transform.rotation.x,
+            rotationY,
+            target.transform.rotation.z);
     }
 }
