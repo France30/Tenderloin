@@ -8,6 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class GameController : Singleton<GameController>
 {
+    private bool isDebug = true; //change this to true if you want to test the game without starting from the title screen
+    public bool IsDebug { get { return isDebug; } }
+
+
     private int currentScore = 0;
     public int HighScore { get; private set; }
 
@@ -23,6 +27,21 @@ public class GameController : Singleton<GameController>
         base.Awake();
         IsGameOver = true;
         IsGameScene = false;
+    }
+
+    public void Start()
+    {
+        if(!isDebug) return;
+            
+        IsGameOver = false;
+        HighScore = 0;
+        currentScore = 0;
+
+        Player = GameObject.Find("Player").GetComponent<PlayerController>();
+        GameScreenUI = GameObject.Find("GameScreenUI").GetComponent<GameScreenUI>();
+
+        IsGameScene = true;
+        AudioManager.Instance.Play("GameSceneBGM");
     }
 
     public void LoadGame()
