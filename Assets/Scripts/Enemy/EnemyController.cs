@@ -84,6 +84,7 @@ public class EnemyController : MonoBehaviour
         if(!enemyAgent.enabled)
             enemyAgent.enabled = true;
 
+        this.target = FindObjectOfType<PlayerController>().gameObject;
         enemyAgent.SetDestination(target.transform.position);
         this.Speed = initialSpeed;
     }
@@ -94,13 +95,15 @@ public class EnemyController : MonoBehaviour
         LookAtTarget();
         if (!enemyAgent.hasPath) return;
 
+        enemyAgent.SetDestination(target.transform.position);
+
         if (enemyAgent.remainingDistance > enemyAgent.stoppingDistance)
         {
             //reset path to update target location
-            if (!isAgentResetting)
+            /*if (!isAgentResetting)
             {
                 StartCoroutine(ResetEnemy());
-            }
+            }*/
 
             animationController.Play("Chase");
             animationController.Stop("Attack"); // in case enemy was in the attack state previously

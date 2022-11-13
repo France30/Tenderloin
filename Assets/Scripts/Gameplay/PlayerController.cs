@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         {
             AudioManager.Instance.Play("PlayerHit");
 
-            Health -= amount;
+            //Health -= amount;
             if (Health < 0) Health = 0;
 
             for (int i = initialHealth - 1 ; i > Health - 1; i--)
