@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class CharacterControllerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed = 2.0f;
-    [SerializeField]
-    private float jumpHeight = 5.0f;
-    [SerializeField]
-    private float gravityScale = 1.0f;
-    [SerializeField]
-    private Transform groundCheck;
-    [SerializeField]
-    private LayerMask groundMask;
+    [SerializeField] private float moveSpeed = 2.0f;
+    [SerializeField] private float sprintSpeed = 4.0f;
 
+    [SerializeField] private float jumpHeight = 5.0f;
+    [SerializeField] private float gravityScale = 1.0f;
+
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private LayerMask groundMask;
+
+    private float baseSpeed;
     private float gravity = -9.8f;
     private Vector3 playerVelocity;
     private bool isGrounded;
@@ -25,6 +24,7 @@ public class CharacterControllerMovement : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        baseSpeed = moveSpeed;
     }
 
     private void Update()
@@ -42,8 +42,17 @@ public class CharacterControllerMovement : MonoBehaviour
         //Debug.Log(moveDirection);
         characterController.Move(moveDirection);
 
+        Sprint();
         Jump();
         ApplyGravity();
+    }
+
+    private void Sprint()
+    {
+        if ((Input.GetKey("left shift") || Input.GetKey("right shift")) && isGrounded)
+            moveSpeed = sprintSpeed;
+        else
+            moveSpeed = baseSpeed;
     }
 
     private void Jump()
