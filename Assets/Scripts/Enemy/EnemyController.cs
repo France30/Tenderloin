@@ -79,8 +79,6 @@ public class EnemyController : MonoBehaviour
         currentHealth = maxHealth;
         this.EnemyScore = initialScore;
 
-        SetRigidbodyIsKinematic(false);
-
         if(!enemyAgent.enabled)
             enemyAgent.enabled = true;
 
@@ -99,12 +97,6 @@ public class EnemyController : MonoBehaviour
 
         if (enemyAgent.remainingDistance > enemyAgent.stoppingDistance)
         {
-            //reset path to update target location
-            /*if (!isAgentResetting)
-            {
-                StartCoroutine(ResetEnemy());
-            }*/
-
             animationController.Play("Chase");
             animationController.Stop("Attack"); // in case enemy was in the attack state previously
             return;
@@ -112,28 +104,11 @@ public class EnemyController : MonoBehaviour
 
         if (enemyAgent.remainingDistance <= enemyAgent.stoppingDistance)
         {
-            //disable kinematic when destination has been reached
-            SetRigidbodyIsKinematic(false);
-
             if (enemyAgent.velocity.sqrMagnitude <= 0.1f)
             {
                 animationController.Play("Attack");
             }
         }
-    }
-
-    private IEnumerator ResetEnemy()
-    {        
-        isAgentResetting = true;
-
-        enemyAgent.ResetPath();
-        enemyAgent.SetDestination(target.transform.position);
-
-        yield return new WaitForSeconds(0.5f);
-
-        SetRigidbodyIsKinematic(true);
-
-        isAgentResetting = false;
     }
 
     private void LookAtTarget()
