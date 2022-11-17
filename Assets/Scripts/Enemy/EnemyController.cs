@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 1f;
-    [SerializeField] private int enemyScore = 1;
+    [SerializeField] private int moneyDrop = 1;
     [SerializeField] private int damage = 1;
     [SerializeField] private GameObject target;
 
@@ -17,12 +17,10 @@ public class EnemyController : MonoBehaviour
 
     private float currentHealth;
     private float initialSpeed;
-    private int initialScore;
-
-    private bool isAgentResetting = false;
+    private int initialMoneyDrop;
 
     public float Speed { get { return enemyAgent.speed; } set { enemyAgent.speed = value;} }
-    public int EnemyScore { get { return enemyScore;  } set { enemyScore = value;  } }
+    public int MoneyDrop { get { return moneyDrop;  } set { moneyDrop = value;  } }
 
     public void PauseMove()
     {
@@ -58,7 +56,7 @@ public class EnemyController : MonoBehaviour
     public void OnDeath()
     {
         SetRigidbodyIsKinematic(true);
-        GameController.Instance.AddScore(enemyScore);
+        GameController.Instance.CurrentMoney += MoneyDrop;
         ObjectPoolManager.Instance.DespawnGameObject(gameObject);
     }
 
@@ -68,7 +66,7 @@ public class EnemyController : MonoBehaviour
         enemyAgent = GetComponent<NavMeshAgent>();
 
         initialSpeed = this.Speed;
-        initialScore = this.EnemyScore;
+        initialMoneyDrop = this.moneyDrop;
     }
 
     private void OnEnable()
@@ -77,7 +75,7 @@ public class EnemyController : MonoBehaviour
         if (!isGameScene) return;
 
         currentHealth = maxHealth;
-        this.EnemyScore = initialScore;
+        this.MoneyDrop = initialMoneyDrop;
 
         if(!enemyAgent.enabled)
             enemyAgent.enabled = true;

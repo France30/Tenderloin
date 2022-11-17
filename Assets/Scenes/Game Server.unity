@@ -1354,7 +1354,7 @@ GameObject:
   - component: {fileID: 2112209171}
   - component: {fileID: 2112209170}
   m_Layer: 5
-  m_Name: Main Menu
+  m_Name: Server List
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

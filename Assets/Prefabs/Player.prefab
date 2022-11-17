@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1695446097}
   - component: {fileID: 7314431711364844031}
   - component: {fileID: 5893092071971799711}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,8 @@ GameObject:
   - component: {fileID: 621745312494229408}
   - component: {fileID: 621745312494229410}
   - component: {fileID: 621745312494229411}
-  m_Layer: 6
+  - component: {fileID: 1429939600}
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -237,7 +238,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 799
+    m_Bits: 3871
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -303,7 +304,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 621745312494229409}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 862
+    m_Bits: 3934
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -348,6 +349,22 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1429939600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621745312494229412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ae18e5896476274c862ff43992c0de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastDistance: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &4017149397145024821
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +374,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4562368018789151086}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,18 +446,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.127
       objectReference: {fileID: 0}
+    - target: {fileID: 3920407966537747700, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3920439790365902826, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
       propertyPath: m_Name
       value: SciFiHandGun
       objectReference: {fileID: 0}
     - target: {fileID: 3920439790365902826, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920439790365902826, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920459204312395690, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920743813785696502, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921062381285449038, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921219269117067002, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921312150784860388, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921607178630364714, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3921607178782336947, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3921607180105442989, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
       propertyPath: fpsCam
       value: 
       objectReference: {fileID: 621745312494229414}
+    - target: {fileID: 3921607180285123360, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3922519236083934990, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67f1663406687014186cc3d2b0b3f2a5, type: 3}
 --- !u!4 &3918714014689513150 stripped

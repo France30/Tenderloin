@@ -12,7 +12,8 @@ public class GameController : Singleton<GameController>
     public bool IsDebug { get { return isDebug; } }
 
 
-    private int currentScore = 0;
+    private int currentMoney = 0;
+    
     public int HighScore { get; private set; }
 
     public bool IsGameOver { get; private set; }
@@ -21,6 +22,16 @@ public class GameController : Singleton<GameController>
     public EnemySpawner EnemySpawner { private get; set; }
     public GameScreenUI GameScreenUI { get; private set; }  
     public PlayerController Player { get; private set; }
+
+    public int CurrentMoney
+    {
+        get { return currentMoney; }
+        set
+        {
+            currentMoney = value;
+            GameScreenUI.UpdateMoneyUI(currentMoney);
+        }
+    }
 
     public override void Awake()
     {
@@ -35,7 +46,7 @@ public class GameController : Singleton<GameController>
             
         IsGameOver = false;
         HighScore = 0;
-        currentScore = 0;
+        currentMoney = 0;
 
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameScreenUI = GameObject.Find("GameScreenUI").GetComponent<GameScreenUI>();
@@ -61,12 +72,6 @@ public class GameController : Singleton<GameController>
         AudioManager.Instance.Stop("GameSceneBGM");
     }
 
-    public void AddScore(int point)
-    {
-        currentScore += point;
-        GameScreenUI.UpdateScoreUI(currentScore.ToString());
-    }
-
     public void GameOver() //subject to change since this was originally designed for a single-player game
     {
         IsGameOver = true;
@@ -83,7 +88,7 @@ public class GameController : Singleton<GameController>
             AudioManager.Instance.Play("PlayerLose");
         }
 
-        HighScore = currentScore;
+        HighScore = currentMoney;
         GameScreenUI.EnableGameOverUI(gameOverMessage);
         Cursor.lockState = CursorLockMode.Confined;
         DisableGame();
@@ -100,7 +105,7 @@ public class GameController : Singleton<GameController>
     {
         IsGameOver = false;
         HighScore = 0;
-        currentScore = 0;        
+        currentMoney = 0;        
 
         yield return SceneManager.LoadSceneAsync("Game Scene");
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,24 +16,30 @@ public class GunController : MonoBehaviour
     [SerializeField] private Camera fpsCam;
     [SerializeField] private ParticleSystem muzzleFlash;
 
-    [SerializeField] private TextMeshProUGUI ammoCounter;
-
     private GunAudioController gunSoundEffect;
 
     private float nextTimeToFire = 1f;
     private int currentAmmo;
     private bool isReloading = false;
-   
+    private bool isAmmoUISet = false;
+
+    private GameScreenUI gameScreenUI;
+
     private void Awake()
     {
         gunSoundEffect = GetComponent<GunAudioController>();
-        currentAmmo = maxAmmo;
-        ammoCounter.text = currentAmmo.ToString();
+        currentAmmo = maxAmmo;        
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if(!isAmmoUISet)
+        {
+            InitializeAmmoUI();
+            return;
+        }
+
         if (isReloading) return;
 
         if(Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
@@ -53,6 +60,21 @@ public class GunController : MonoBehaviour
         }
     }
 
+    private void InitializeAmmoUI()
+    {
+        try
+        {
+            gameScreenUI = GameController.Instance.GameScreenUI;
+            gameScreenUI.UpdateAmmoUI(currentAmmo, maxAmmo);
+
+            isAmmoUISet = true;
+        }
+        catch (NullReferenceException e)
+        {
+            //do nothing
+        }
+    }
+
     private void Shoot()
     {
         muzzleFlash.Play();
@@ -60,7 +82,7 @@ public class GunController : MonoBehaviour
 
         currentAmmo--;
         //Debug.Log(currentAmmo);
-        ammoCounter.text = currentAmmo.ToString();
+        gameScreenUI.UpdateAmmoUI(currentAmmo, maxAmmo);
 
         RaycastHit hit;
         bool hasHit = Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range);
@@ -100,6 +122,6 @@ public class GunController : MonoBehaviour
         isReloading = false;
 
         currentAmmo = maxAmmo;
-        ammoCounter.text = currentAmmo.ToString();
+        gameScreenUI.UpdateAmmoUI(currentAmmo, maxAmmo);
     }
 }

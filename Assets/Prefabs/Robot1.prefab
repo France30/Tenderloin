@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
-  enemyScore: 5
+  moneyDrop: 100
   damage: 2
   target: {fileID: 621745312442493605, guid: 842b9b5fbfdf61543b3037f6b7367051, type: 3}
 --- !u!195 &-3791961906294833225

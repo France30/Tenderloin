@@ -51,6 +51,7 @@ public class EnemySpawner : MonoBehaviour
             enemyCount = Random.Range(1, enemiesLeft);
         else
             enemyCount = Random.Range(wave[currentWaveCount].minEnemyCount, wave[currentWaveCount].maxEnemyCount);
+
         currentEnemyCount += enemyCount;
 
         //Debug.Log("spawning " + enemyCount + " in the " + parent.name);
@@ -89,8 +90,8 @@ public class EnemySpawner : MonoBehaviour
         float waveEnemySpeed = enemyController.Speed * wave[currentWaveCount].speedMultiplier;
         enemyController.Speed = waveEnemySpeed;
 
-        int waveEnemyPoint = enemyController.EnemyScore * wave[currentWaveCount].scoreMultiplier;
-        enemyController.EnemyScore = waveEnemyPoint;
+        int waveEnemyPoint = enemyController.MoneyDrop * wave[currentWaveCount].pointMultiplier;
+        enemyController.MoneyDrop = waveEnemyPoint;
     }
 
     private void NextWave()

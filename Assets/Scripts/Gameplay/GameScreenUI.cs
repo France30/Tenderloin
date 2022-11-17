@@ -7,8 +7,14 @@ using TMPro;
 public class GameScreenUI : MonoBehaviour
 {
     [Header("Game UI")]
-    [SerializeField] private TextMeshProUGUI scoreUI;
+    [SerializeField] private TextMeshProUGUI moneyUI;
     [SerializeField] private TextMeshProUGUI waveCountUI;
+    [SerializeField] private TextMeshProUGUI interactablePopUp;
+    [SerializeField] private TextMeshProUGUI ammoUI;
+
+
+    [Header("PowerUp Inventory UI")]
+    [SerializeField] private Image[] inventoryIcon;
 
     [SerializeField] private float alertTime = 2.5f;
 
@@ -35,10 +41,11 @@ public class GameScreenUI : MonoBehaviour
     private Color initialDamageScreenColor;
     public Color DamageScreenColor { get { return damageScreen.color; } private set { damageScreen.color = value; } }
     public GameObject GameOverRanking { get { return gameOverRanking; } }
+    public TextMeshProUGUI InteractablePopUp { get { return interactablePopUp; } }
 
-    public void UpdateScoreUI(string score)
+    public void UpdateMoneyUI(int money)
     {
-        scoreUI.text = score;
+        moneyUI.text = '$' + money.ToString();
     }
 
     public void UpdateWaveCount(string waveCount)
@@ -48,7 +55,21 @@ public class GameScreenUI : MonoBehaviour
         timer = alertTime;
     }
 
-    public void DisableHealthBar(int healthCount)
+    public void UpdateInventoryIcon(List<Sprite> inventory)
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            inventoryIcon[i].sprite = inventory[i];
+            inventoryIcon[i].enabled = true;
+        }
+    }
+
+    public void UpdateAmmoUI(int currentAmmo, int maxAmmo )
+    {
+        ammoUI.text = currentAmmo.ToString() + " / " + maxAmmo.ToString();
+    }
+
+    public void DisableHealthBar(int healthCount) //to be replaced with UpdateHealthBar
     {
         healthBar[healthCount].SetActive(false);
     }

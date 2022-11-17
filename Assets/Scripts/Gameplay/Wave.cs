@@ -11,5 +11,5 @@ public class Wave
     [Range(1f, 2f)]
     public float speedMultiplier;
     [Range(1, 10)]
-    public int scoreMultiplier;
+    public int pointMultiplier;
 }
