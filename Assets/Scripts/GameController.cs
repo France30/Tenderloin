@@ -85,7 +85,7 @@ public class GameController : Singleton<GameController>
         IsGameOver = true;
 
         string gameOverMessage;
-        if (Player.Health > 0)
+        if (Player.CurrentHealth > 0)
         {
             gameOverMessage = "YOU WIN";
             AudioManager.Instance.Play("PlayerWin");

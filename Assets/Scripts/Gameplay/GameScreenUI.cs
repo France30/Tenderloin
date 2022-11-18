@@ -26,7 +26,7 @@ public class GameScreenUI : MonoBehaviour
     [SerializeField] private GameObject dangerUI;
 
     [Header("Health UI")]
-    [SerializeField] private GameObject[] healthBar;
+    [SerializeField] private Image healthBar;
 
     [Header("Damage UI")]
     [SerializeField] private GameObject damageUI;
@@ -75,9 +75,9 @@ public class GameScreenUI : MonoBehaviour
         ammoUI.text = currentAmmo.ToString() + " / " + maxAmmo.ToString();
     }
 
-    public void DisableHealthBar(int healthCount) //to be replaced with UpdateHealthBar
+    public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
-        healthBar[healthCount].SetActive(false);
+        healthBar.fillAmount = currentHealth / maxHealth;
     }
 
     public void EnableDangerUI()
