@@ -57,6 +57,7 @@ public class EnemyController : MonoBehaviour
     {
         SetRigidbodyIsKinematic(true);
         GameController.Instance.CurrentMoney += MoneyDrop;
+        GameController.Instance.CurrentEnemyCount -= 1;
         ObjectPoolManager.Instance.DespawnGameObject(gameObject);
     }
 

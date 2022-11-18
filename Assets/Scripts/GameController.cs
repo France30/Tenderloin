@@ -13,7 +13,8 @@ public class GameController : Singleton<GameController>
 
 
     private int currentMoney = 0;
-    
+    private int currentEnemyCount = 0;
+
     public int HighScore { get; private set; }
 
     public bool IsGameOver { get; private set; }
@@ -23,6 +24,14 @@ public class GameController : Singleton<GameController>
     public GameScreenUI GameScreenUI { get; set; }  
     public PlayerController Player { get; set; }
 
+    public int CurrentEnemyCount { 
+        get { return currentEnemyCount; } 
+        set 
+        {
+            currentEnemyCount = value;
+            GameScreenUI.UpdateEnemyCountUI(currentEnemyCount);
+        } 
+    }
     public int CurrentMoney
     {
         get { return currentMoney; }

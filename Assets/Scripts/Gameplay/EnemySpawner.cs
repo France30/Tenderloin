@@ -21,6 +21,7 @@ public class EnemySpawner : MonoBehaviour
         InvokeRepeating("SpawnEnemies", timeBetweenWaves, wave[0].spawnTime);
 
         GameController.Instance.EnemySpawner = this;
+        GameController.Instance.CurrentEnemyCount = wave[0].totalEnemies;
     }
 
     private void Update()
@@ -105,6 +106,8 @@ public class EnemySpawner : MonoBehaviour
             resumeTime = timeBetweenWaves;
 
             GameController.Instance.GameScreenUI.UpdateWaveCount((currentWaveCount + 1).ToString());
+
+            GameController.Instance.CurrentEnemyCount = wave[currentWaveCount].totalEnemies;
         }
         else
         {
