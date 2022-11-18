@@ -47,6 +47,8 @@ public class GameController : Singleton<GameController>
         base.Awake();
         IsGameOver = true;
         IsGameScene = false;
+
+        Application.targetFrameRate = 60;
     }
 
     public void Start()
