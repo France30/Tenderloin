@@ -20,8 +20,8 @@ public class GameController : Singleton<GameController>
     public bool IsGameScene { get; private set; }
 
     public EnemySpawner EnemySpawner { private get; set; }
-    public GameScreenUI GameScreenUI { get; private set; }  
-    public PlayerController Player { get; private set; }
+    public GameScreenUI GameScreenUI { get; set; }  
+    public PlayerController Player { get; set; }
 
     public int CurrentMoney
     {
@@ -48,7 +48,6 @@ public class GameController : Singleton<GameController>
         HighScore = 0;
         currentMoney = 0;
 
-        Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameScreenUI = GameObject.Find("GameScreenUI").GetComponent<GameScreenUI>();
 
         IsGameScene = true;
@@ -109,7 +108,6 @@ public class GameController : Singleton<GameController>
 
         yield return SceneManager.LoadSceneAsync("Game Scene");
 
-        Player = GameObject.Find("Player").GetComponent<PlayerController>();
         GameScreenUI = GameObject.Find("GameScreenUI").GetComponent<GameScreenUI>();
         
         IsGameScene = true;

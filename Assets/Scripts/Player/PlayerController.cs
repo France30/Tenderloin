@@ -40,7 +40,9 @@ public class PlayerController : MonoBehaviour
         gameObject.AddComponent<Inventory>();
     }
 
+    private void OnEnable()
     {
+        GameController.Instance.Player = this;
     }
 
     private void Update()
