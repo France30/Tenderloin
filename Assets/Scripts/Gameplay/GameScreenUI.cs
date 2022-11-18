@@ -9,12 +9,13 @@ public class GameScreenUI : MonoBehaviour
     [Header("Game UI")]
     [SerializeField] private TextMeshProUGUI moneyUI;
     [SerializeField] private TextMeshProUGUI waveCountUI;
+    [SerializeField] private TextMeshProUGUI enemyCountUI;
     [SerializeField] private TextMeshProUGUI interactablePopUp;
     [SerializeField] private TextMeshProUGUI ammoUI;
 
-
     [Header("PowerUp Inventory UI")]
     [SerializeField] private Image[] inventoryIcon;
+
 
     [SerializeField] private float alertTime = 2.5f;
 
@@ -46,6 +47,11 @@ public class GameScreenUI : MonoBehaviour
     public void UpdateMoneyUI(int money)
     {
         moneyUI.text = '$' + money.ToString();
+    }
+
+    public void UpdateEnemyCountUI(int enemyCount)
+    {
+        enemyCountUI.text = enemyCount.ToString();
     }
 
     public void UpdateWaveCount(string waveCount)
