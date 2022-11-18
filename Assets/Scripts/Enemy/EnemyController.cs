@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
     private float initialSpeed;
     private int initialMoneyDrop;
 
+    private bool isDeath = false;
+
     public float Speed { get { return enemyAgent.speed; } set { enemyAgent.speed = value;} }
     public int MoneyDrop { get { return moneyDrop;  } set { moneyDrop = value;  } }
 
@@ -44,7 +46,7 @@ public class EnemyController : MonoBehaviour
             //enable physics when shot
             SetRigidbodyIsKinematic(false);
         }
-        else
+        else if(currentHealth <= 0 && !isDeath)
             animationController.Play("Death");
     }
 
@@ -53,8 +55,10 @@ public class EnemyController : MonoBehaviour
         GameController.Instance.Player.TakeDamage(damage);
     }
 
-    public void OnDeath()
+    public void OnDeath() //function should only be called once when the enemy dies
     {
+        isDeath = true; //this bool prevents the function from being called multiple times
+
         SetRigidbodyIsKinematic(true);
         GameController.Instance.CurrentMoney += MoneyDrop;
         GameController.Instance.CurrentEnemyCount -= 1;
