@@ -76,6 +76,7 @@ public class EnemyController : MonoBehaviour
         bool isGameScene = GameController.Instance.IsGameScene;
         if (!isGameScene) return;
 
+        isDeath = false;
         currentHealth = maxHealth;
         this.MoneyDrop = initialMoneyDrop;
 
