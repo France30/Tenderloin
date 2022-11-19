@@ -27,6 +27,7 @@ public class GameScreenUI : MonoBehaviour
 
     [Header("Health UI")]
     [SerializeField] private Image healthBar;
+    [SerializeField] private TextMeshProUGUI healthTextUI;
 
     [Header("Damage UI")]
     [SerializeField] private GameObject damageUI;
@@ -77,6 +78,7 @@ public class GameScreenUI : MonoBehaviour
 
     public void UpdateHealthBar(float currentHealth, float maxHealth)
     {
+        healthTextUI.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         healthBar.fillAmount = currentHealth / maxHealth;
     }
 

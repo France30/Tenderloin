@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxHealth = 100;
 
     private float currentHealth;
+    private bool isHealthUISet = false;
 
     private PlayerDamage playerDamage;
+    private GameScreenUI gameScreenUI;
 
     public float CurrentHealth { get { return currentHealth; } }
 
@@ -46,6 +49,25 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (!isHealthUISet)
+        {
+            InitializeHealthUI();
+            return;
+        }
+    }
 
+    private void InitializeHealthUI()
+    {
+        try
+        {
+            gameScreenUI = GameController.Instance.GameScreenUI;
+            gameScreenUI.UpdateHealthBar(currentHealth, maxHealth);
+
+            isHealthUISet = true;
+        }
+        catch (NullReferenceException e)
+        {
+            //do nothing
+        }
     }
 }
