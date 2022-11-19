@@ -43,8 +43,6 @@ public class EnemyController : MonoBehaviour
         if (currentHealth > 0)
         {
             animationController.Play("Hit");
-            //enable physics when shot
-            SetRigidbodyIsKinematic(false);
         }
         else if(currentHealth <= 0 && !isDeath)
             animationController.Play("Death");
@@ -59,7 +57,6 @@ public class EnemyController : MonoBehaviour
     {
         isDeath = true; //this bool prevents the function from being called multiple times
 
-        SetRigidbodyIsKinematic(true);
         GameController.Instance.CurrentMoney += MoneyDrop;
         GameController.Instance.CurrentEnemyCount -= 1;
         ObjectPoolManager.Instance.DespawnGameObject(gameObject);
@@ -118,11 +115,5 @@ public class EnemyController : MonoBehaviour
     {
         Vector3 targetPosition = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z);
         transform.LookAt(targetPosition);
-    }
-
-    private void SetRigidbodyIsKinematic(bool state)
-    {
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
-        rigidbody.isKinematic = state;
     }
 }
