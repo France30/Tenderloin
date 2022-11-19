@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         if (currentHealth > 0)
         {
             currentHealth -= amount;
-            Debug.Log(currentHealth);
+            //Debug.Log(currentHealth);
             if (currentHealth < 0) currentHealth = 0;
 
             GameController.Instance.GameScreenUI.UpdateHealthBar(currentHealth, maxHealth);

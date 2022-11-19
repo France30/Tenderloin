@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
         Sprite itemIcon = item.GetComponent<PowerUp>().GetItemSprite();
         inventory.Add(itemIcon);
 
-        Debug.Log("Adding to inventory");
+        //Debug.Log("Adding to inventory");
 
         GameScreenUI gameScreenUI = GameController.Instance.GameScreenUI;
         gameScreenUI.UpdateInventoryIcon(inventory);
