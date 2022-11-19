@@ -54,6 +54,7 @@ public class EnemySpawner : MonoBehaviour
             enemyCount = Random.Range(wave[currentWaveCount].minEnemyCount, wave[currentWaveCount].maxEnemyCount);
 
         currentEnemyCount += enemyCount;
+        Debug.Log("current enemy count: " + currentEnemyCount);
 
         //Debug.Log("spawning " + enemyCount + " in the " + parent.name);
 
@@ -66,12 +67,14 @@ public class EnemySpawner : MonoBehaviour
             if (pooledEnemy != null)
             {
                 pooledEnemy.transform.parent = parent;
-                pooledEnemy.transform.localPosition = Vector3.zero;        
+                pooledEnemy.transform.localPosition = Vector3.zero;
                 //Activate it to use the object
                 pooledEnemy.SetActive(true);
 
                 SetEnemyDifficulty(pooledEnemy);
             }
+            else
+                i--;
         }
     }
 
