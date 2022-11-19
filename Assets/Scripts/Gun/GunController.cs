@@ -90,13 +90,14 @@ public class GunController : MonoBehaviour
         {
             //Debug.Log(hit.transform.name);
 
-            EnemyController enemy = hit.transform.GetComponent<EnemyController>();
-            if (enemy != null)
+            //EnemyController enemy = hit.transform.GetComponent<EnemyController>();
+
+            if (hit.transform.TryGetComponent<EnemyController>(out EnemyController enemy))
             {
                 enemy.TakeDamage(damage);
 
-                if (hit.rigidbody != null)
-                    hit.rigidbody.AddForce(-hit.normal * impactForce);
+                if (enemy.gameObject.TryGetComponent<Rigidbody>(out Rigidbody enemyRigidbody))
+                    enemyRigidbody.AddForce(-hit.normal * impactForce);
             }
         }
 
