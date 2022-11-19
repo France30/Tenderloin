@@ -42,7 +42,7 @@ public class GunController : MonoBehaviour
 
         if (isReloading) return;
 
-        if(Input.GetButtonDown("Fire1") && Time.time >= nextTimeToFire)
+        if(Input.GetButton("Fire1") && Time.time >= nextTimeToFire)
         {
             if (currentAmmo <= 0)
             {

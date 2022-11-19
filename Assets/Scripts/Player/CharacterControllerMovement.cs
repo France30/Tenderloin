@@ -20,10 +20,12 @@ public class CharacterControllerMovement : MonoBehaviour
     private float distToGround = 0.4f;
 
     private CharacterController characterController;
+    private PlayerController player;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        player = GetComponent<PlayerController>();
         baseSpeed = moveSpeed;
     }
 
@@ -49,7 +51,8 @@ public class CharacterControllerMovement : MonoBehaviour
 
     private void Sprint()
     {
-        if ((Input.GetKey("left shift") || Input.GetKey("right shift")) && isGrounded)
+        bool sprintKeyPress = (Input.GetKey("left shift") || Input.GetKey("right shift"));
+        if (sprintKeyPress && isGrounded && !player.IsPlayerFiring)
             moveSpeed = sprintSpeed;
         else
             moveSpeed = baseSpeed;

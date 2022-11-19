@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
 
     private float currentHealth;
     private bool isHealthUISet = false;
+    private bool isPlayerFiring = false;
 
     private PlayerDamage playerDamage;
     private GameScreenUI gameScreenUI;
 
     public float CurrentHealth { get { return currentHealth; } }
+    public bool IsPlayerFiring { get { return isPlayerFiring; } }
 
     public void TakeDamage(int amount)
     {
@@ -54,6 +56,8 @@ public class PlayerController : MonoBehaviour
             InitializeHealthUI();
             return;
         }
+
+        CheckIfPlayerIsFiring();
     }
 
     private void InitializeHealthUI()
@@ -69,5 +73,13 @@ public class PlayerController : MonoBehaviour
         {
             //do nothing
         }
+    }
+
+    private void CheckIfPlayerIsFiring()
+    {
+        if (Input.GetButton("Fire1"))
+            isPlayerFiring = true;
+        else
+            isPlayerFiring = false;
     }
 }
