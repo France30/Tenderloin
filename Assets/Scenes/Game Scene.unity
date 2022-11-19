@@ -8508,6 +8508,7 @@ MonoBehaviour:
   nextWaveUI: {fileID: 2127732096}
   dangerUI: {fileID: 1868415628}
   healthBar: {fileID: 1025076407}
+  healthTextUI: {fileID: 317865920}
   damageUI: {fileID: 1435580160}
   damageScreen: {fileID: 1809132434}
   gameOverUI: {fileID: 439203177}
@@ -9242,17 +9243,17 @@ MonoBehaviour:
   - id: RobotKyle
     objectToPool: {fileID: 6386997184207605108, guid: 76d351a2fbe365c479459660868b6c02, type: 3}
     parent: {fileID: 876484506}
-    amountToPool: 10
+    amountToPool: 15
     shouldExpand: 0
   - id: TheBoi
     objectToPool: {fileID: 7465294887362724044, guid: 5358fd1db56fd5f4ebd3a9185f223155, type: 3}
     parent: {fileID: 876484506}
-    amountToPool: 5
+    amountToPool: 10
     shouldExpand: 0
   - id: Robot1
     objectToPool: {fileID: 1765116360898588, guid: bdd91695cfcf4b643963af1fce587ef5, type: 3}
     parent: {fileID: 876484506}
-    amountToPool: 3
+    amountToPool: 5
     shouldExpand: 0
   - id: PowerUp
     objectToPool: {fileID: 2923054745570562710, guid: c98d12a95e27a2c47b4927c25491de79, type: 3}
