@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
             enemyCount = Random.Range(wave[currentWaveCount].minEnemyCount, wave[currentWaveCount].maxEnemyCount);
 
         currentEnemyCount += enemyCount;
-        Debug.Log("current enemy count: " + currentEnemyCount);
+        //Debug.Log("current enemy count: " + currentEnemyCount);
 
         //Debug.Log("spawning " + enemyCount + " in the " + parent.name);
 
