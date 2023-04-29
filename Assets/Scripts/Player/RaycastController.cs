@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Photon.Pun;
 
 public class RaycastController : MonoBehaviour
 {
@@ -11,14 +12,18 @@ public class RaycastController : MonoBehaviour
 
     private GameObject interactable;
     private PlayerInteraction playerInteraction;
+    private PhotonView photonView;
 
     private void OnEnable()
     {
+        photonView = GetComponentInParent<PhotonView>();
         playerInteraction = gameObject.AddComponent<PlayerInteraction>();
     }
 
     private void Update()
     {
+        if (!photonView.IsMine) return;
+
         if (Input.GetKeyDown("e"))
         {
             if (interactable == null) return;
@@ -29,19 +34,19 @@ public class RaycastController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!photonView.IsMine) return;
+
         RaycastHit hit;
 
         if(Physics.Raycast(transform.position, transform.forward, out hit, raycastDistance, layerMask))
         {            
             try
             {
-                if (interactable != null) return;
-
                 interactable = hit.collider.gameObject;
 
                 GameScreenUI gameScreenUI = GameController.Instance.GameScreenUI;
-                gameScreenUI.InteractablePopUp.text = interactable.GetComponent<Interactable>().GetInteractableInfo();
-                gameScreenUI.InteractablePopUp.enabled = true;
+                string interactableInfo = interactable.GetComponent<Interactable>().GetInteractableInfo();
+                gameScreenUI.UpdateInteractablePopUp(interactableInfo);
             }
             catch (NullReferenceException e)
             {
@@ -54,9 +59,7 @@ public class RaycastController : MonoBehaviour
             try
             {
                 GameScreenUI gameScreenUI = GameController.Instance.GameScreenUI;
-                if (!gameScreenUI.InteractablePopUp.enabled) return;
-
-                gameScreenUI.InteractablePopUp.enabled = false;
+                gameScreenUI.UpdateInteractablePopUp("");
                 interactable = null;
             }
             catch (NullReferenceException e) 

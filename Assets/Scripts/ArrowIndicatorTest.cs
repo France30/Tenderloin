@@ -7,6 +7,6 @@ public class ArrowIndicatorTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameController.Instance.GameScreenUI.UpdateDownedIndicator(true, this.transform);
+        //GameController.Instance.GameScreenUI.UpdateDownedIndicator(true, this.transform);
     }
 }

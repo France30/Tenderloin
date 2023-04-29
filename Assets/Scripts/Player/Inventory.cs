@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    private const int INVENTORY_SIZE = 8;
+    private const int INVENTORY_SIZE = 10;
     private List<Sprite> inventory = new List<Sprite>();
 
     public bool CheckIfInventoryFull()
@@ -22,6 +22,15 @@ public class Inventory : MonoBehaviour
         //Debug.Log("Adding to inventory");
 
         GameScreenUI gameScreenUI = GameController.Instance.GameScreenUI;
-        gameScreenUI.UpdateInventoryIcon(inventory);
+        UpdateInventoryIcon(gameScreenUI.InventoryIcon);
+    }
+
+    public void UpdateInventoryIcon(Image[] inventoryIcon)
+    {
+        for (int i = 0; i < inventory.Count; i++)
+        {
+            inventoryIcon[i].sprite = inventory[i];
+            inventoryIcon[i].enabled = true;
+        }
     }
 }

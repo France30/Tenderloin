@@ -14,9 +14,6 @@ public class UI
     public TextMeshProUGUI interactablePopUp;
     public TextMeshProUGUI ammoUI;
 
-    [Header("Player Down Indicator UI")]
-    public GameObject arrowIndicatorUI;
-
     [Header("PowerUp Inventory UI")]
     public Image[] inventoryIcon;
 
@@ -39,7 +36,4 @@ public class UI
 
     [Header("Game Over UI")]
     public GameObject gameOverUI;
-    public TextMeshProUGUI gameOverText;
-    public TextMeshProUGUI gameOverScore;
-    public GameObject gameOverRanking;
 }

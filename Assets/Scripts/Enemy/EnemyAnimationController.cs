@@ -6,6 +6,7 @@ public class EnemyAnimationController : MonoBehaviour
 {
     private Animator animator;
     private EnemyAudioController enemySoundEffect;
+    private EnemyController enemy;
 
     private float maxSpeed;
 
@@ -14,6 +15,9 @@ public class EnemyAnimationController : MonoBehaviour
         if (IsPlaying(state)) return;
         
         animator.SetTrigger(state);
+
+        if (state == "Attack") //disable weapon collider at the start of the animation
+            enemy.Weapon.Collider.enabled = false;
 
         if (state == "Hit" || state == "Death")
             StartCoroutine(WaitForAnimation(state));
@@ -30,6 +34,7 @@ public class EnemyAnimationController : MonoBehaviour
         maxSpeed = animator.speed;
 
         enemySoundEffect = GetComponent<EnemyAudioController>();
+        enemy = GetComponent<EnemyController>();
     }
 
     private void OnEnable()
@@ -49,7 +54,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     private IEnumerator WaitForAnimation(string state)
     {
-        EnemyController enemy = GetComponent<EnemyController>();
+        
         enemy.PauseMove();
 
         enemySoundEffect.Play(state);

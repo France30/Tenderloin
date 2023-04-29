@@ -17,7 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         PlayerController player = gameObject.GetComponentInParent<PlayerController>();
 
-        player.TryGetComponent<Inventory>(out Inventory inventory);
+        Inventory inventory = GameController.Instance.GameStats.Inventory;
         if (inventory.CheckIfInventoryFull())
         {
             InteractFailed("Inventory is Full");
@@ -30,18 +30,17 @@ public class PlayerInteraction : MonoBehaviour
     private void ChestTryInteract(Chest chest)
     {
         //do not interact if player doesn't have enough money
-        if (GameController.Instance.CurrentMoney < chest.CostToOpen)
+        if (GameController.Instance.GameStats.CurrentMoney < chest.CostToOpen)
         {
             InteractFailed("Not Enough Money");
             return;
         }
 
-        chest.Interact();
-        GameController.Instance.CurrentMoney -= chest.CostToOpen;
+        chest.Interact();        
     }
 
     private void InteractFailed(string failMessage = "")
     {
-        Debug.Log(failMessage); //placeholder, will replace with something else
+        AudioManager.Instance.Play("ActionDenied");
     }
 }

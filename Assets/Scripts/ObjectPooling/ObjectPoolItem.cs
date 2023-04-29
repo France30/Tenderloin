@@ -1,18 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class ObjectPoolItem
 {
-    //unique id
+    //unique identifier
     public string id;
-    //prefab of the object we want to make copies of
+    //prefab
     public GameObject objectToPool;
-    //parent transform to attach the object once it is instantiated
+    //parent transform to attach the gameobject once instantiate
     public Transform parent;
-    //how many objects will be instantiated to the pool at the beginning
+    //how many objects will be initially instantiated
     public int amountToPool;
-    //if we reached the maximum amount to pool, should we intantiate a new prefab instance?
+    //if we reach the maximum amount to pool, check if we need to instantiate a new prefab instane
     public bool shouldExpand;
 }
+

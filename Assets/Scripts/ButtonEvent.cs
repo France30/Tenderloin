@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class ButtonEvent : MonoBehaviour
 {
-    public void LoadGame()
-    { 
-        GameController.Instance.LoadGame();
-    }
-
     public void QuitToMainMenu()
     {
-        GameController.Instance.QuitToMainMenu();
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.RemoveRPCs(PhotonNetwork.MasterClient);
+        else
+            PhotonNetwork.RemoveRPCs(PhotonNetwork.LocalPlayer);
+
+        PhotonNetwork.Disconnect();
+
+        SceneManager.LoadScene("Title Screen");
     }
 
     public void ExitGame()
@@ -23,11 +27,5 @@ public class ButtonEvent : MonoBehaviour
         #else
             Application.Quit();
         #endif
-    }
-
-    public void AddScoreToRanking(TMP_InputField nameInput)
-    {
-        ScoreManager.Instance.AddScore(new Score(name: nameInput.text , score: GameController.Instance.HighScore));
-        GameController.Instance.GameScreenUI.GameOverRanking.SetActive(true);
     }
 }

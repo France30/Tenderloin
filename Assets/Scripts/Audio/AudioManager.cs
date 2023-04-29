@@ -6,9 +6,10 @@ public class AudioManager : Singleton<AudioManager>
 { 
     [SerializeField] private Sound[] sounds;
 
-    public override void Awake()
+    protected override void Awake()
     {
         base.Awake();
+
         foreach(Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();

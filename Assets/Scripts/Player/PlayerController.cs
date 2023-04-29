@@ -2,73 +2,186 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using Photon.Pun;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     [SerializeField] private float maxHealth = 100;
+    [SerializeField] private GunController playerGun;
+    [SerializeField] private TextMeshProUGUI playerName;
 
-    private float currentHealth;
     private bool isHealthUISet = false;
-    private bool isPlayerFiring = false;
 
     private PlayerDamage playerDamage;
     private GameScreenUI gameScreenUI;
 
-    public float CurrentHealth { get { return currentHealth; } }
-    public bool IsPlayerFiring { get { return isPlayerFiring; } }
+    private float currentHealth = 0f;
 
+    public float CurrentHealth { get { return currentHealth; }
+        set 
+        {
+            currentHealth = value;
+        } 
+    }
+    public float MaxHealth 
+    { 
+        get { return maxHealth; }
+        set 
+        {
+            maxHealth = value;
+            if (maxHealth <= 0) maxHealth = 1;
+
+            GameController.Instance.GameScreenUI.UpdateHealthBar(CurrentHealth, maxHealth);
+        } 
+    }
+
+    public bool IsPlayerFiring { get; private set; }
+    public bool IsPlayerDown { get; private set; }
+    public bool IsPlayerReloading { get; set; }
+    public bool IsPlayerSprinting { get; set; }   
+
+    public PlayerAnimationController PlayerAnimation { get; private set; }
+    public CharacterControllerMovement PlayerMovement { get; private set; }
+    public GunController PlayerGun { get { return playerGun; } }
+    public string PlayerName { get { return playerName.text; } set { playerName.text = value; } }
+    public PhotonView PhotonView { get; private set; }
+
+    private int damageResist = 0;
+    public int DamageResist
+    {
+        get { return damageResist; }
+        set
+        {
+            damageResist = value;
+            if (damageResist < 0) damageResist = 0;
+        }
+    }
+    
     public void TakeDamage(int amount)
     {
-        if (currentHealth > 0)
+        if (CurrentHealth <= 0 || !PhotonView.IsMine) return;
+
+        //apply damage resist if any
+        if (damageResist >= amount)
+            amount = 0;
+        else
+            amount -= damageResist; 
+
+        CurrentHealth -= amount;
+        if (CurrentHealth < 0) CurrentHealth = 0;
+
+        GameController.Instance.GameScreenUI.UpdateHealthBar(CurrentHealth, maxHealth);
+        playerDamage.DamageEffect();
+
+        CheckIfPlayerDowned();
+    }
+
+    private void CheckIfPlayerDowned()
+    {
+        if (CurrentHealth > 0) return;
+
+        PhotonView.RPC("RPCPlayerDowned", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void RPCPlayerDowned()
+    {
+        IsPlayerDown = true;
+        PlayerAnimation.Play("Downed");
+        GameController.Instance.CheckIfAllPlayersDowned();
+
+        if (GameController.Instance.IsGameOver) return;
+
+        PlayerController[] players = FindObjectsOfType<PlayerController>();
+        foreach (PlayerController player in players)
         {
-            currentHealth -= amount;
-            //Debug.Log(currentHealth);
-            if (currentHealth < 0) currentHealth = 0;
+            if (player.IsPlayerDown) continue;
 
-            GameController.Instance.GameScreenUI.UpdateHealthBar(currentHealth, maxHealth);
-            playerDamage.DamageEffect();
+            EnemyController[] enemy = FindObjectsOfType<EnemyController>();
+            for (int i = 0; i < enemy.Length; i++)
+                enemy[i].SetTarget(player.PhotonView.ViewID);
 
-            //if (currentHealth <= 0)
-                //GameController.Instance.GameOver();
+            return;
         }
+    }
+
+    [PunRPC]
+    private void RPCSetGunAnimationBool(string parameter, bool state)
+    {
+        playerGun.Animator.SetBool(parameter, state);
+    }
+
+    [PunRPC]
+    private void RPCShootEffect()
+    {
+        playerGun.MuzzleFlash.Play();
+        playerGun.GunSoundEffect.Play("shoot");
     }
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
+
+        IsPlayerReloading = false;
+        IsPlayerDown = false;
+        InitializeComponents();
     }
 
-    private void Start()
+    private void InitializeComponents()
     {
+        PhotonView = gameObject.GetComponent<PhotonView>();
+
+        //Player Damage
         playerDamage = gameObject.GetComponent<PlayerDamage>();
-        gameObject.AddComponent<Inventory>();
+
+        //Player Movement
+        PlayerMovement = gameObject.GetComponent<CharacterControllerMovement>();
+
+        //Player Animation
+        if (gameObject.TryGetComponent<PlayerAnimationController>(out PlayerAnimationController animationController))
+            PlayerAnimation = animationController;
+        else
+            PlayerAnimation = gameObject.AddComponent<PlayerAnimationController>();       
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
+        base.OnEnable();
+
+        if (!PhotonView.IsMine) return;
+
+        photonView.RPC("RPCSetPlayerName", RpcTarget.OthersBuffered, PhotonNetwork.LocalPlayer.NickName);
         GameController.Instance.Player = this;
+    }
+
+    [PunRPC]
+    private void RPCSetPlayerName(string name)
+    {
+        playerName.text = name;
     }
 
     private void Update()
     {
-        if (!isHealthUISet)
-        {
-            InitializeHealthUI();
-            return;
-        }
+        if (!PhotonView.IsMine) return;
+
+        InitializeHealthUI(); //only runs once
 
         CheckIfPlayerIsFiring();
     }
 
     private void InitializeHealthUI()
     {
+        if (isHealthUISet) return;
+
         try
         {
             gameScreenUI = GameController.Instance.GameScreenUI;
-            gameScreenUI.UpdateHealthBar(currentHealth, maxHealth);
+            gameScreenUI.UpdateHealthBar(CurrentHealth, maxHealth);
 
             isHealthUISet = true;
         }
+
         catch (NullReferenceException e)
         {
             //do nothing
@@ -78,8 +191,8 @@ public class PlayerController : MonoBehaviour
     private void CheckIfPlayerIsFiring()
     {
         if (Input.GetButton("Fire1"))
-            isPlayerFiring = true;
+            IsPlayerFiring = true;
         else
-            isPlayerFiring = false;
+            IsPlayerFiring = false;
     }
 }
