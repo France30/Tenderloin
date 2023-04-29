@@ -10,6 +10,7 @@ public class EnemySpawner : Spawner
     [SerializeField] private float timeBetweenWaves;
     [SerializeField] private EnemyWave[] wave;
 
+    private List<string> origEnemiesList;
     private int currentEnemyCount;
     private int currentWaveCount = 0;
 
@@ -36,6 +37,8 @@ public class EnemySpawner : Spawner
 
     private void Start()
     {
+        origEnemiesList = enemies;
+
         photonView = GetComponent<PhotonView>();
 
         Difficulty = "Easy";
@@ -84,6 +87,8 @@ public class EnemySpawner : Spawner
     private void SpawnEnemies()
     {
         bool waveGoalReached = currentEnemyCount >= wave[currentWaveCount].totalEnemies;
+        enemies = origEnemiesList;
+
         if (waveGoalReached)
         {
             CancelInvoke();
@@ -102,37 +107,49 @@ public class EnemySpawner : Spawner
 
         currentEnemyCount += enemyCount;
 
+        RemoveUnavailableEnemyIds();
+        if (enemies.Count <= 0) return;
+
         for (int i = 0; i < enemyCount; i++)
         {
             //Use the object pool manager to get an enemy from the list
             string enemyID = GetRandomID(enemies);
             GameObject enemy = ObjectPoolManager.Instance.GetPooledObject(enemyID);
-           
-            if (enemy != null)
+
+            PhotonNetwork.InstantiateRoomObject(enemyID, parent.position, Quaternion.identity);
+            SetEnemyDifficulty(enemy);
+            PlayerController[] players = FindObjectsOfType<PlayerController>();
+            PlayerController player = players[Random.Range(0, players.Length - 1)];
+
+            if(player.IsPlayerDown)
             {
-                PhotonNetwork.InstantiateRoomObject(enemyID, parent.position, Quaternion.identity);
-                SetEnemyDifficulty(enemy);
-                PlayerController[] players = FindObjectsOfType<PlayerController>();
-                PlayerController player = players[Random.Range(0, players.Length - 1)];
-
-                if(player.IsPlayerDown)
+                foreach(PlayerController p in players)
                 {
-                    foreach(PlayerController p in players)
-                    {
-                        if (p.IsPlayerDown) continue;
+                    if (p.IsPlayerDown) continue;
 
-                        player = p;
-                        break;
-                    }
+                    player = p;
+                    break;
                 }
-
-                enemy.GetComponent<EnemyController>().SetTarget(player.PhotonView.ViewID);
             }
-            else
-                i--;
+
+            enemy.GetComponent<EnemyController>().SetTarget(player.PhotonView.ViewID);
         }
 
         photonView.RPC("RPCSyncEnemySpawner", RpcTarget.Others, resumeTime, currentEnemyCount);
+    }
+
+    private void RemoveUnavailableEnemyIds()
+    {
+        if (enemies.Count <= 0) return;
+
+        string enemyID = GetRandomID(enemies);
+        GameObject enemy = ObjectPoolManager.Instance.GetPooledObject(enemyID);
+
+        if (enemy != null) return;
+
+        enemies.Remove(enemyID);
+
+        RemoveUnavailableEnemyIds();
     }
 
     private void SetEnemyDifficulty(GameObject enemy)
@@ -181,6 +198,7 @@ public class EnemySpawner : Spawner
         else
         {
             CancelInvoke();
+            enemies = origEnemiesList;
             GameController.Instance.GameOver();
         }
     }
