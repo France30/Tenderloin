@@ -6,7 +6,7 @@ up to you and your most trusted ally to fight your way and survive to escape Ten
 ## Gameplay
 [Insert video here]
 
-## How To Play
+## Controls
 ```
   WASD = Move
   Shift = Sprint
