@@ -4,7 +4,7 @@ of a Western nation in the far-future. Resources are scarce, violence is at an a
 up to you and your most trusted ally to fight your way and survive to escape Tenderloin.
 
 ## Gameplay
-[Insert video here]
+https://github.com/France30/Tenderloin/assets/53886711/a47eda64-30b9-4276-a5b5-20d3bc03d73a
 
 ## Controls
 ```
