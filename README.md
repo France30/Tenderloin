@@ -3,6 +3,7 @@ Tenderloin is a platformer-based, first-person movement shooter based in the low
 of a Western nation in the far-future. Resources are scarce, violence is at an all-time high, so it’s
 up to you and your most trusted ally to fight your way and survive to escape Tenderloin.
 
+(Programming by me, UI Assets & Level Design by https://www.artstation.com/zenevergreen, UI Concept Design by https://www.linkedin.com/in/niegel-ignatius-ukol-09baa327b/).
 ## Gameplay
 https://github.com/France30/Tenderloin/assets/53886711/a47eda64-30b9-4276-a5b5-20d3bc03d73a
 
