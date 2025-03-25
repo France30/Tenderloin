@@ -21,4 +21,4 @@ https://github.com/France30/Tenderloin/assets/53886711/a47eda64-30b9-4276-a5b5-2
 ```
 
 ## Download Link
-<b>Google Drive: </b>https://drive.google.com/file/d/1UPPDEa1aHsnE74ZOtyPxccH_Fls_mf1G/view?usp=sharing
+<b>Google Drive: </b>https://drive.google.com/drive/folders/1iytD1J4GnMCbHLe5t-cMjXPNh89synZf?usp=drive_link
